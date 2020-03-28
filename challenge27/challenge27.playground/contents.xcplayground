@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<<<<<<< HEAD
-<playground version='5.0' target-platform='ios'>
-=======
-<playground version='5.0' target-platform='ios' display-mode='raw'>
->>>>>>> 3be981ff8500d81e351eb7cd825699596be636aa
-    <timeline fileName='timeline.xctimeline'/>
-</playground>
