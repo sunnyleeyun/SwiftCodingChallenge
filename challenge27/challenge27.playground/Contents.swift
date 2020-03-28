@@ -1,17 +1,10 @@
 import Foundation
 
 func challenge27(filename: String, lineCount: Int) {
-  let fileComponents = filename.components(separatedBy: ".")
-  guard fileComponents.count == 2 else {
+  guard let input = try? String(contentsOfFile: filename) else {
     return
   }
-  let fileResource = fileComponents[0]
-  let fileType = fileComponents[1]
-  let filePath = Bundle.main.path(forResource: fileResource, ofType: fileType)
-  guard let input = try? String(contentsOfFile: filePath!) else {
-    return
-  }
-  var lines = input.components(separatedBy: "\\\n").filter { !$0.isEmpty && !$0.contains("}") }
+  var lines = input.components(separatedBy: "\n")
   guard lines.count > 0 else {
     return
   }
