@@ -34,3 +34,10 @@ func challenge28(log message: String, to file: String) {
 
 challenge28(log: "If you're seeing this, you succeed!", to: "testLogFile")
 challenge28(log: "Go again for another log", to: "testLogFile")
+
+func challenge29() -> URL {
+  let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+  return paths[0]
+}
+
+print(challenge29())
