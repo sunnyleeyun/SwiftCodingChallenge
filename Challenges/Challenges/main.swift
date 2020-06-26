@@ -21,3 +21,16 @@ func challenge27(fileName: String, lineCount: Int) {
 }
 
 challenge27(fileName: "sampleInput.txt", lineCount: 5)
+
+func challenge28(log message: String, to file: String) {
+  var exist = (try? String(contentsOfFile: file)) ?? ""
+  exist.append("\(Date()) \(message)\n")
+  do {
+    try exist.write(toFile: file, atomically: true, encoding: .utf8)
+  } catch {
+    print("Failed to write log to file, \(error.localizedDescription)")
+  }
+}
+
+challenge28(log: "If you're seeing this, you succeed!", to: "testLogFile")
+challenge28(log: "Go again for another log", to: "testLogFile")
