@@ -137,3 +137,33 @@ func challenge34(in directory: String) -> [String] {
   }
   return f
 }
+
+func challenge35iOS(in directory: String) {
+  let fm = FileManager.default
+  let dirUrl = URL(fileURLWithPath: directory)
+  guard let files = try? fm.contentsOfDirectory(at: dirUrl, includingPropertiesForKeys: nil) else {
+    return
+  }
+  for file in files {
+    guard file.pathExtension == "jpg" || file.pathExtension == "jpeg" else { continue }
+    guard let image = UIImage(contentsOfFile: file.path), let png = UIImagePNGRepresentation(image) else { continue }
+    let newFileName = file.deletingPathExtension().appendingPathExtension("png")
+    _ = try? png.write(to: nilFileName)
+  }
+}
+
+
+func challenge35macOS(in directory: String) {
+  let fm = FileManager.default
+  let dirUrl = URL(fileURLWithPath: directory)
+  guard let files = try? fm.contentsOfDirectory(at: dirUrl, includingPropertiesForKeys: nil) else {
+    return
+  }
+  for file in files {
+    guard file.pathExtension == "jpg" || file.pathExtension == "jpeg" else { continue }
+    guard let image = NSImage(contentsOfFile: file.path), let imageRep = NSBitImageRep(data: tiffData), let png = imageRep.representation(using: .PNG, properties: [:]) else { continue }
+    let newFileName = file.deletingPathExtension().appendingPathExtension("png")
+    _ = try? png.write(to: nilFileName)
+  }
+}
+
