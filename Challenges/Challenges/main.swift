@@ -98,3 +98,24 @@ func challenge32(filename: String, count: Int) -> Int {
   let wordSet = NSCountedSet(array: allWords)
   return wordSet.count(for: count)
 }
+
+func challenge33(in directory: String) -> [String] {
+  let fm = FileManager.default
+  let directoryUrl = URL(fileURLWithPath: directory)
+  guard let files = fm.enumerator(at: directoryUrl, includingPropertiesForKeys: nil) else {
+    return []
+  }
+  var duplicates = Set<String>()
+  var seen = Set<String>()
+  for file in files {
+    guard let file = file as? URL, !file.hasDirectoryPath else {
+      continue
+    }
+    let fileName = file.lastPathComponent
+    if seen.contains(fileName) {
+      duplicates.insert(fileName)
+    }
+    seen.insert(fileName)
+  }
+  return Array(duplicates)
+}
