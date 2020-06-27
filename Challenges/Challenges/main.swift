@@ -119,3 +119,21 @@ func challenge33(in directory: String) -> [String] {
   }
   return Array(duplicates)
 }
+
+func challenge34(in directory: String) -> [String] {
+  let fm = FileManager.default
+  let dirUrl = URL(fileURLWithPath: directory)
+  guard let files = try? fm.contentsOfDirectory(at: dirUrl, includingPropertiesForKeys: nil) else {
+    return []
+  }
+  var f = [String]()
+  for file in files {
+    guard !file.hasDirectoryPath else {
+      continue
+    }
+    if fm.isExecutableFile(atPath: file.path) {
+      f.append(file.lastPathComponent)
+    }
+  }
+  return f
+}
