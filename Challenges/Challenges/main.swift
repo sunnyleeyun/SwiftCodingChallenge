@@ -167,3 +167,13 @@ func challenge35macOS(in directory: String) {
   }
 }
 
+func challenge36(fileName: String) -> Int {
+  var totalErrors = 0
+  var reader = ChunkedFileReader(path: fileName)
+  while let line = reader.readLine() {
+    if line.hasPrefix("[ERROR]") {
+      totalErrors += 1
+    }
+  }
+  return totalErrors
+}
