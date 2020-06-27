@@ -65,3 +65,24 @@ func challenge30(with directory: String) -> [String] {
   return j
   
 }
+
+func challenge31(source: String, destination: String) -> Bool {
+  let fm = FileManager.default
+  var isDirectory: ObjCBool = false
+  
+  guard fm.fileExists(atPath: source, isDirectory: &isDirectory) || isDirectory.boolValue == false else {
+    return false
+  }
+  
+  let sourceUrl = URL(fileURLWithPath: source)
+  let destinationUrl = URL(fileURLWithPath: destination)
+  
+  do {
+    try fm.copyItem(at: sourceUrl, to: destinationUrl)
+  } catch {
+    print("failed copy with error: \(error.localizedDescription)")
+    return false
+  }
+  return true
+  
+}
