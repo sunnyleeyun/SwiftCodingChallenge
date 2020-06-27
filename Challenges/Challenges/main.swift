@@ -41,3 +41,27 @@ func challenge29() -> URL {
 }
 
 print(challenge29())
+
+func challenge30(with directory: String) -> [String] {
+  let fm = FileManager.default
+  let dirUrl = URL(fileURLWithPath: directory)
+  guard let files = try? fm.contentsOfDirectory(at: dirUrl, includingPropertiesForKeys: nil) else {
+    return []
+  }
+  
+  var j = [String]()
+  for file in files {
+    if file.pathExtension == "jpg" || file.pathExtension == "jpeg" {
+      guard let attributes = try? fm.attributesOfItem(atPath: file.path),
+            let creation = attributes[.creationDate] as? Date else {
+        continue
+      }
+      if creation > Date(timeIntervalSinceNow: -60 * 60 * 48) {
+        j.append(file.lastPathComponent)
+      }
+      
+    }
+  }
+  return j
+  
+}
