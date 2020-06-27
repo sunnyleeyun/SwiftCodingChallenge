@@ -86,3 +86,15 @@ func challenge31(source: String, destination: String) -> Bool {
   return true
   
 }
+
+
+func challenge32(filename: String, count: Int) -> Int {
+  guard let inputString = try? String(contentsOfFile: filename) else {
+    return 0
+  }
+  var nonLetters = CharacterSet.letters.inverted
+  nonLetters.remove("'")
+  let allWords = inputString.components(separatedBy: nonLetters)
+  let wordSet = NSCountedSet(array: allWords)
+  return wordSet.count(for: count)
+}
